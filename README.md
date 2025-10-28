@@ -1,81 +1,97 @@
-# Welcome to your Expo app 👋
+# 💬 ChatM3
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A **WhatsApp-inspired chat UI** built with **Expo Router**, **React Native**, and **TypeScript**.  
+It includes phone number authentication, OTP verification, splash screen animation (with GIF support), and a clean modular structure.
 
-## Get started
+---
 
-1. Install dependencies
+## 🧠 Tech Stack
 
-   ```bash
-   npm install
-   ```
+![React Native](https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🚀 Features
 
-In the output, you'll find options to open the app in a
+- 📱 Phone number input with country picker
+- 🔐 OTP verification countdown with resend option
+- 💬 Chat navigation structure (ready for tab expansion)
+- 🎨 Reusable, scalable UI components
+- 🟢 WhatsApp-style splash screen (supports GIFs)
+- ⚙️ File-based navigation powered by Expo Router
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 📁 Project Structure
 
 ```bash
-npm run reset-project
-
-local.properties=sdk.dir=C:\\Users\\USER\\AppData\\Local\\Android\\Sdk
+chatm3/
+├── app/
+│   ├── (auth)/               # Authentication routes
+│   │   ├── input_number.tsx
+│   │   ├── verify_otp/[phone].tsx
+│   │   └── _layout.tsx
+│   ├── (tabs)/               # Main chat routes
+│   ├── _layout.tsx           # Root layout (with splash & auth check)
+│   └── index.tsx             # Welcome screen with GIF
+├── src/
+│   ├── components/           # Reusable UI components
+│   ├── constants/            # Colors, image paths, etc.
+│   ├── assets/               # Images, fonts, GIFs
+│   └── utils/                # Helpers
+└── package.json
 ```
 
-https://github.com/CaioQuirinoMedeiros/react-native-mask-input
-npm install react-native-mask-input
+---
 
-`````
+## 🧑‍💻 Getting Started
 
-````https://github.com/retyui/react-native-confirmation-code-field
-npm install  react-native-confirmation-code-field
-```npx expo install expo-dev-client
-to build your own expo-go application
+### 1. Clone the repository
 
-npx expo prebuild
+```bash
+git clone https://github.com/your-username/chatm3.git
+cd chatm3
+```
 
-npx expo run:android
+### 2. Install dependencies
 
-<!-- fixing sdk location error -->
-local.properties:sdk.dir=C:\\Users\\USER\\AppData\\Local\\Android\\Sdk
+```bash
+npm install
+```
 
-npx expo run:android
+### 3. Start the app
+
+```bash
 npx expo start
+```
 
-npx expo install expo-secure-store
+---
 
-npm install @clerk/clerk-expo
-npm install date-fns
-npm i react-native-size-matters
+## 📦 Key Dependencies
 
-to run manually:npx expo start --dev-client
-to run offline:npx react-native run-android --variant release
+| Library                                                                                                | Purpose                           |
+| ------------------------------------------------------------------------------------------------------ | --------------------------------- |
+| [react-native-country-picker-modal](https://github.com/xcarpentier/react-native-country-picker-modal)  | Country picker with flags & codes |
+| [react-native-confirmation-code-field](https://github.com/retyui/react-native-confirmation-code-field) | OTP input field                   |
+| [react-native-mask-input](https://github.com/CaioQuirinoMedeiros/react-native-mask-input)              | Masked phone input                |
+| [react-native-size-matters](https://github.com/nirsky/react-native-size-matters)                       | Scalable sizing for all screens   |
+| [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)                            | Secure token storage              |
 
-"scripts": {
-    "start": "expo start --dev-client",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "prebuild": "expo prebuild",
-    "clean": "rm -rf node_modules && npm install",
-    "build:android:release": "react-native run-android --variant release",
-    "build:android:debug": "react-native run-android --variant debug",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
-  }
-npm install react-native-country-picker-modal react-native-svg
+---
 
+## 📸 Screens
 
-npm install react-native-keyboard-aware-scroll-view
-`````
+| Screen                  | Description                            |
+| ----------------------- | -------------------------------------- |
+| 🟢 **Welcome Screen**   | Animated intro with WhatsApp-style GIF |
+| 🔢 **Phone Input**      | Enter phone number with country picker |
+| 🔐 **OTP Verification** | Code field input and countdown timer   |
+| 💬 **Chats Tab**        | Placeholder for chat UI (expandable)   |
+
+---
+
+> 💡 _Built with ❤️ using React Native + Expo_
