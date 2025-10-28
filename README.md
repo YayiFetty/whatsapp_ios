@@ -31,20 +31,51 @@ When you're ready, run:
 
 ```bash
 npm run reset-project
+
+local.properties=sdk.dir=C:\\Users\\USER\\AppData\\Local\\Android\\Sdk
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+https://github.com/CaioQuirinoMedeiros/react-native-mask-input
+npm install react-native-mask-input
 
-## Learn more
+`````
 
-To learn more about developing your project with Expo, look at the following resources:
+````https://github.com/retyui/react-native-confirmation-code-field
+npm install  react-native-confirmation-code-field
+```npx expo install expo-dev-client
+to build your own expo-go application
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+npx expo prebuild
 
-## Join the community
+npx expo run:android
 
-Join our community of developers creating universal apps.
+<!-- fixing sdk location error -->
+local.properties:sdk.dir=C:\\Users\\USER\\AppData\\Local\\Android\\Sdk
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+npx expo run:android
+npx expo start
+
+npx expo install expo-secure-store
+
+npm install @clerk/clerk-expo
+npm install date-fns
+npm i react-native-size-matters
+
+to run manually:npx expo start --dev-client
+to run offline:npx react-native run-android --variant release
+
+"scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "prebuild": "expo prebuild",
+    "clean": "rm -rf node_modules && npm install",
+    "build:android:release": "react-native run-android --variant release",
+    "build:android:debug": "react-native run-android --variant debug",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  }
+npm install react-native-country-picker-modal react-native-svg
+
+
+npm install react-native-keyboard-aware-scroll-view
+`````

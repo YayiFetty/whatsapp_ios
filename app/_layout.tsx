@@ -1,24 +1,68 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+// app/_layout.tsx
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Font from "expo-font";
+import { Redirect, SplashScreen, Stack, useSegments } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, View } from "react-native";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+SplashScreen.preventAutoHideAsync();
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+const InitialLayout = () => {
+  const [ready, setReady] = useState(false);
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const segments = useSegments();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  useEffect(() => {
+    async function loadResources() {
+      try {
+        // Load custom fonts
+        await Font.loadAsync({
+          helv: require("../src/assets/fonts/helmed.ttf"),
+        });
+
+        // Check authentication (replace with your logic)
+        const token = await AsyncStorage.getItem("userToken");
+        setAuthenticated(!!token);
+      } catch (e) {
+        console.warn("Error loading resources:", e);
+      } finally {
+        setReady(true);
+        await SplashScreen.hideAsync();
+      }
+    }
+
+    loadResources();
+  }, []);
+
+  // While fonts and auth are loading
+  if (!ready || authenticated === null) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
+  const inAuthGroup = segments[0] === "(auth)";
+
+  if (authenticated && inAuthGroup) {
+    return <Redirect href="/(tabs)/chats" />;
+  }
+
+  if (!authenticated && !inAuthGroup) {
+    return <Redirect href="/(auth)" />;
+  }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="(tabs)" />
+    </Stack>
   );
-}
+};
+
+const RootLayout = () => {
+  return <InitialLayout />;
+};
+
+export default RootLayout;
