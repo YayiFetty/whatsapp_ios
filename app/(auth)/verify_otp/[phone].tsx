@@ -1,6 +1,7 @@
 import Btn from "@/src/components/Btn";
 import CodeFields from "@/src/components/CodeFields";
 import Colors from "@/src/constants/Colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
@@ -22,7 +23,7 @@ export default function Otp() {
   // Get the dynamic segment
   const params = useLocalSearchParams<{ phone: string }>();
   const phoneNumber = params.phone;
-  const [seconds, setSeconds] = useState(63);
+  const [seconds, setSeconds] = useState(12);
   const [resend, setResend] = useState(false);
   const [otp, setOtp] = useState("");
   useEffect(() => {
@@ -43,9 +44,13 @@ export default function Otp() {
     return `${min}:${sec < 10 ? "0" : ""}${sec}`;
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
     console.log("Resend OTP");
-    setSeconds(63);
+
+    const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    await AsyncStorage.setItem("generatedOtp", newOtp);
+    console.log("New otp for demo", newOtp);
+    setSeconds(12);
     setResend(false);
     //    trigger OTP resend logic here
   };
@@ -62,11 +67,21 @@ export default function Otp() {
       hideSub.remove();
     };
   }, []);
-  const onVerify = () => {
+  const onVerify = async () => {
     // Verify OTP logic here
+    // Simulate OTP verification
+    const storedOtp = await AsyncStorage.getItem("generatedOtp");
+    if (otp === storedOtp) {
+      // ✅ Save a user token (or any dummy token) to mark authentication
+      await AsyncStorage.setItem("userToken", "dummy_token");
+
+      // Navigate to the main tabs
+      router.push("/(auth)/restore_backup");
+    } else {
+      alert("Incorrect OTP. Please try again.");
+    }
     console.log("Verifying OTP:", otp);
     // On successful verification, navigate to the next screen
-    router.replace("/(tabs)/chats");
   };
   return (
     <KeyboardAvoidingView

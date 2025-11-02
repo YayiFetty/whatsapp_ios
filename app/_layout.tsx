@@ -50,7 +50,7 @@ const InitialLayout = () => {
   }
 
   if (!authenticated && !inAuthGroup) {
-    return <Redirect href="/(auth)" />;
+    return <Redirect href="/(auth)/input_number" />;
   }
 
   return (

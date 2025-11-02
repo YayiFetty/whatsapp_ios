@@ -38,6 +38,34 @@ export default function AuthLayout() {
         }}
       />
       <Stack.Screen name="verify_otp" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="restore_backup"
+        options={{
+          headerTitle: "Restore from iCloud",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: Colors.background,
+          },
+          headerTitleStyle: {
+            fontWeight: "600",
+            fontSize: 20,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="profile"
+        options={{
+          headerTitle: "Edit profile",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: Colors.background,
+          },
+          headerTitleStyle: {
+            fontWeight: "600",
+            fontSize: 20,
+          },
+        }}
+      />
     </Stack>
   );
 }

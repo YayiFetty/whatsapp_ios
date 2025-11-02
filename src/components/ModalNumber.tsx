@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { s } from "react-native-size-matters";
+import { s, vs } from "react-native-size-matters";
 import { defaultStyles } from "../constants/Styles";
 
 interface ConfirmModalProps {
@@ -29,15 +29,18 @@ export default function ModalNumber({
         <View style={styles.modalView}>
           <View style={styles.modalNumContainer}>
             <Text style={styles.modalNumber}>{number}</Text>
-            <Text>Is this your number ?</Text>
+            <Text style={styles.editYesBtnText}>Is this your number ?</Text>
           </View>
+
           <View style={defaultStyles.separator} />
+
           <View style={styles.editYesBtn}>
             <TouchableOpacity onPress={onEdit}>
-              <Text>Edit</Text>
+              <Text style={styles.editYesBtnText}>Edit</Text>
             </TouchableOpacity>
+            <View style={defaultStyles.divider} />
             <TouchableOpacity onPress={onYes}>
-              <Text>Yes</Text>
+              <Text style={styles.editYesBtnText}>Yes</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -51,18 +54,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(0,0,0,0.1)",
     zIndex: 1000,
   },
   modalView: {
-    width: s(220),
-    height: s(100),
+    width: s(200),
+    height: s(120),
     borderRadius: 10,
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    padding: s(20),
-    gap: s(10),
+    paddingVertical: vs(10),
+    paddingHorizontal: s(15),
+    gap: s(5),
     backgroundColor: "white",
   },
   modalNumContainer: {
@@ -72,12 +76,18 @@ const styles = StyleSheet.create({
     gap: s(10),
   },
   modalNumber: {
-    fontSize: s(18),
+    fontSize: s(16),
     fontWeight: "bold",
   },
   editYesBtn: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     width: "100%",
+    alignItems: "stretch",
+    overflow: "hidden",
+  },
+  editYesBtnText: {
+    fontSize: s(12),
+    fontWeight: "400",
   },
 });

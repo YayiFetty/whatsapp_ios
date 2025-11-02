@@ -8,7 +8,7 @@ export default function SettingsLayout() {
       <Stack.Screen
         name="index"
         options={{
-          headerTitle: "Settings",
+          headerTitle: "Calls",
           headerLargeTitle: true,
           headerLargeTitleShadowVisible: false,
           headerStyle: {
