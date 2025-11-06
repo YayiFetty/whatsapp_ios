@@ -3,6 +3,7 @@ import Colors from "@/src/constants/Colors";
 import imagePath from "@/src/constants/imagePath";
 import { avatar, devices, items, support } from "@/src/constants/settingsData";
 import { handleLogout } from "@/src/services/authService";
+import { Feather } from "@expo/vector-icons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -32,22 +33,16 @@ export default function Settings() {
     );
   };
 
-  // Navigation handlers for each section
   const handleNavigation = (route: string, itemName: string) => {
     console.log(`Navigating to ${route} - ${itemName}`);
     router.push(route as any);
   };
 
-  // Specific handlers for profile actions
   const handleProfilePress = () => {
-    router.push("/profile" as any);
+    router.push("/(tabs)/settings/profile");
   };
 
-  const handleQRCodePress = () => {
-    router.push("/qr-code" as any);
-  };
-
-  // Combine all sections into a single data array for FlatList
+  // Combine all sections into a single FlatList data array
   const sections = [
     { id: "profile", type: "profile" },
     { id: "avatar", type: "section", title: "Profile", data: avatar },
@@ -58,27 +53,39 @@ export default function Settings() {
   ];
 
   const renderItem = ({ item }: any) => {
-    // Render Profile Header
+    // Profile Header Section
     if (item.type === "profile") {
       return (
-        <TouchableOpacity
-          style={styles.profileSection}
-          onPress={handleProfilePress}
-          activeOpacity={0.7}
-        >
-          <Image source={imagePath.icon} style={styles.avatar} />
-          <View style={styles.profileInfo}>
-            <Text style={styles.username}>YayiFetty</Text>
-            <Text style={styles.caption}>Caption</Text>
+        <View style={styles.section}>
+          <View style={styles.profileSection}>
+            <TouchableOpacity
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+              onPress={handleProfilePress}
+              activeOpacity={0.7}
+            >
+              <View style={{ flex: 1, flexDirection: "row" }}>
+                <Image source={imagePath.icon} style={styles.avatar} />
+                <View style={styles.profileInfo}>
+                  <Text style={styles.username}>YayiFetty</Text>
+                  <Text style={styles.caption}>Caption</Text>
+                </View>
+              </View>
+              <AntDesign name="qrcode" size={24} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginHorizontal: 10 }}>
+              <Feather name="plus-circle" size={24} color="blue" />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={handleQRCodePress} activeOpacity={0.7}>
-            <AntDesign name="qrcode" size={24} color="black" />
-          </TouchableOpacity>
-        </TouchableOpacity>
+        </View>
       );
     }
 
-    // Render Section with Items
+    // Regular Section (Profile, Devices, Settings, Support)
     if (item.type === "section") {
       return (
         <View style={styles.section}>
@@ -91,14 +98,15 @@ export default function Settings() {
                   text={subItem.name}
                   backgroundColor={subItem.backgroundColor}
                   onPress={() => {
-                    // Handle navigation based on item name or route
                     const route =
                       subItem.route ||
-                      `/${subItem.name.toLowerCase().replace(/\s+/g, "-")}`;
+                      `/ (tabs)/settings/${subItem.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`;
                     handleNavigation(route, subItem.name);
                   }}
                 />
-                {/* Add hairline separator between items, but not after the last one */}
+                {/* Add hairline separator between items */}
                 {subIndex < item.data.length - 1 && (
                   <View style={styles.hairline} />
                 )}
@@ -109,7 +117,7 @@ export default function Settings() {
       );
     }
 
-    // Render Logout Button
+    // Logout Button
     if (item.type === "logout") {
       return (
         <TouchableOpacity style={styles.logoutBtn} onPress={confirmLogout}>
@@ -141,25 +149,31 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: s(15),
-    paddingBottom: vs(50),
+    paddingBottom: vs(10),
   },
+  // ---------- Profile Card ----------
   profileSection: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: Colors.gray,
-    paddingVertical: vs(15),
-    paddingHorizontal: s(15),
-    borderRadius: s(10),
-    marginBottom: vs(20),
+    justifyContent: "space-between",
+    backgroundColor: "#fff",
+    paddingVertical: vs(10),
+    overflow: "hidden",
+    borderRadius: s(5),
+
+    elevation: 1, // Android subtle shadow
+    shadowColor: "#000",
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
   },
   avatar: {
-    width: s(60),
-    height: s(60),
-    borderRadius: s(30),
-    marginRight: s(15),
+    width: s(55),
+    height: s(55),
+    borderRadius: s(27.5),
+    marginRight: s(12),
   },
   profileInfo: {
-    flex: 1,
     justifyContent: "center",
   },
   username: {
@@ -173,34 +187,38 @@ const styles = StyleSheet.create({
     color: Colors.black,
     opacity: 0.6,
   },
+  // ---------- Section ----------
   section: {
-    marginBottom: vs(20),
+    marginBottom: vs(5),
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: "600",
     color: Colors.gray,
-    marginBottom: vs(10),
+    paddingVertical: s(10),
     paddingHorizontal: s(5),
   },
   itemsContainer: {
     backgroundColor: "#fff",
-    gap: s(10),
-    padding: s(10),
-    overflow: "hidden",
     borderRadius: s(5),
+    overflow: "hidden",
+    gap: s(10),
+    paddingHorizontal: s(10),
+    paddingVertical: vs(10),
   },
   hairline: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: "#e0e0e0",
-    marginLeft: s(60), // Indent to align with text, not icon
+    marginLeft: s(60),
   },
+  // ---------- Logout ----------
   logoutBtn: {
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.gray,
     paddingVertical: vs(15),
     borderRadius: s(10),
     alignItems: "center",
     marginTop: vs(10),
+    marginBottom: vs(60),
   },
   logoutText: {
     color: "#fff",

@@ -9,7 +9,6 @@ export default function TabLayout() {
       tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={{
         headerShown: false,
-        hea,
       }}
     >
       {TAB_CONFIG.map((tab) => (
