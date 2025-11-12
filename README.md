@@ -82,7 +82,7 @@ npx expo start
 | [react-native-size-matters](https://github.com/nirsky/react-native-size-matters)                       | Scalable sizing for all screens   |
 | [expo-secure-store](https://docs.expo.dev/versions/latest/sdk/securestore/)                            | Secure token storage              |
 
----
+## dateFns
 
 ## 📸 Screens
 

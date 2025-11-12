@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Chats() {
   return (
@@ -8,3 +8,5 @@ export default function Chats() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({});

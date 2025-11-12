@@ -14,4 +14,17 @@ export const defaultStyles = StyleSheet.create({
     backgroundColor: Colors.gray,
     height: "100%",
   },
+  block: {
+    backgroundColor: "#fff",
+
+    borderRadius: 10,
+    marginHorizontal: 14,
+    marginTop: 20,
+  },
+  item: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    gap: 10,
+  },
 });

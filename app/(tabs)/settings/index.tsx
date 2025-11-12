@@ -100,7 +100,7 @@ export default function Settings() {
                   onPress={() => {
                     const route =
                       subItem.route ||
-                      `/ (tabs)/settings/${subItem.name
+                      `/(tabs)/settings/${subItem.name
                         .toLowerCase()
                         .replace(/\s+/g, "-")}`;
                     handleNavigation(route, subItem.name);
@@ -130,15 +130,17 @@ export default function Settings() {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={sections}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
-    </View>
+    <FlatList
+      style={styles.container}
+      data={sections}
+      keyExtractor={(item) => item.id}
+      renderItem={renderItem}
+      contentContainerStyle={styles.listContent}
+      showsVerticalScrollIndicator={false}
+      contentInsetAdjustmentBehavior="automatic"
+      automaticallyAdjustContentInsets={true}
+      bounces={true}
+    />
   );
 }
 
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: s(15),
-    paddingBottom: vs(10),
+    paddingBottom: vs(60),
   },
   // ---------- Profile Card ----------
   profileSection: {
