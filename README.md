@@ -93,6 +93,8 @@ npx expo start
 | 🔐 **OTP Verification** | Code field input and countdown timer   |
 | 💬 **Chats Tab**        | Placeholder for chat UI (expandable)   |
 
----
+## npx expo install expo-haptics
+
+https://github.com/software-mansion/react-native-gesture-handler
 
 > 💡 _Built with ❤️ using React Native + Expo_

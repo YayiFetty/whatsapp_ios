@@ -12,3 +12,11 @@ export default {
   black: "#000",
   tintblue: "#97b9f8ff",
 };
+
+const Palette = {
+  baseGray05: "#DCDCE2",
+  baseGray80: "#30302E",
+  background: "#FFF",
+};
+
+export { Palette };
