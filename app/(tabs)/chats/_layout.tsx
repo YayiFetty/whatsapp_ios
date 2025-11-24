@@ -1,10 +1,10 @@
 import Colors from "@/src/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import { Stack } from "expo-router";
+import { Link, Stack } from "expo-router";
 import React, { useState } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
-export default function SettingsLayout() {
+export default function ChatLayout() {
   const [isEditing, setIsEditing] = useState(false);
 
   const onEdit = () => {
@@ -18,23 +18,39 @@ export default function SettingsLayout() {
         options={{
           headerTitle: "Chats",
           headerLargeTitle: true,
+          headerTransparent: true,
           headerBlurEffect: "regular",
           headerLargeTitleShadowVisible: false,
           headerStyle: {
-            backgroundColor: Colors.background,
+            backgroundColor: "#fff",
           },
           headerSearchBarOptions: {
             placeholder: "Search",
           },
           headerLeft: () => (
             <TouchableOpacity onPress={onEdit}>
-              <Text>{isEditing ? "Done" : "Edit"}</Text>
+              <Ionicons name="ellipsis-horizontal-circle-outline" />
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <TouchableOpacity>
-              <Ionicons name="call-outline" color={Colors.primary} size={20} />
-            </TouchableOpacity>
+            <View style={{ flexDirection: "row", gap: 30 }}>
+              <TouchableOpacity>
+                <Ionicons
+                  name="camera-outline"
+                  color={Colors.primary}
+                  size={30}
+                />
+                <Link href="/" asChild>
+                  <TouchableOpacity>
+                    <Ionicons
+                      name="add-circle"
+                      color={Colors.primary}
+                      size={30}
+                    />
+                  </TouchableOpacity>
+                </Link>
+              </TouchableOpacity>
+            </View>
           ),
         }}
       />

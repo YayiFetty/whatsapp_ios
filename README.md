@@ -98,3 +98,5 @@ npx expo start
 https://github.com/software-mansion/react-native-gesture-handler
 
 > 💡 _Built with ❤️ using React Native + Expo_
+
+control shift P json to
