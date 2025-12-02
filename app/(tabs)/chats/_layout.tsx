@@ -28,28 +28,32 @@ export default function ChatLayout() {
             placeholder: "Search",
           },
           headerLeft: () => (
-            <TouchableOpacity onPress={onEdit}>
-              <Ionicons name="ellipsis-horizontal-circle-outline" />
+            <TouchableOpacity onPress={onEdit} style={{ marginRight: 10 }}>
+              <Ionicons
+                name="ellipsis-horizontal-circle-outline"
+                size={25}
+                color={Colors.primary}
+              />
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <View style={{ flexDirection: "row", gap: 30 }}>
+            <View style={{ flexDirection: "row", gap: 20 }}>
               <TouchableOpacity>
                 <Ionicons
                   name="camera-outline"
                   color={Colors.primary}
                   size={30}
                 />
-                <Link href="/" asChild>
-                  <TouchableOpacity>
-                    <Ionicons
-                      name="add-circle"
-                      color={Colors.primary}
-                      size={30}
-                    />
-                  </TouchableOpacity>
-                </Link>
               </TouchableOpacity>
+              <Link href="/" asChild>
+                <TouchableOpacity>
+                  <Ionicons
+                    name="add-circle"
+                    color={Colors.primary}
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </Link>
             </View>
           ),
         }}

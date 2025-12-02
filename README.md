@@ -97,6 +97,8 @@ npx expo start
 
 https://github.com/software-mansion/react-native-gesture-handler
 
+https://github.com/Kieran-McIntyre/react-native-section-alphabet-list
+
 > 💡 _Built with ❤️ using React Native + Expo_
 
 control shift P json to

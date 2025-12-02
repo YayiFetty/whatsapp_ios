@@ -1,4 +1,5 @@
 // app/_layout.tsx
+import Colors from "@/src/constants/Colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Font from "expo-font";
 import { Redirect, SplashScreen, Stack, useSegments } from "expo-router";
@@ -57,6 +58,22 @@ const InitialLayout = () => {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(auth)" />
       <Stack.Screen name="(tabs)" />
+      <Stack.Screen
+        name="(modals)/new-chat"
+        options={{
+          presentation: "modal",
+          title: "New Chat",
+          headerTransparent: true,
+          headerBlurEffect: "regular",
+          headerStyle: {
+            backgroundColor: Colors.background,
+          },
+          headerSearchBarOptions: {
+            placeholder: "Search name or number",
+            hideWhenScrolling: false,
+          },
+        }}
+      />
     </Stack>
   );
 };

@@ -3,6 +3,7 @@ import { defaultStyles } from "@/src/constants/Styles";
 import chats from "@/src/data/chats.json";
 import React from "react";
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { vs } from "react-native-size-matters";
@@ -12,20 +13,25 @@ export default function Chats() {
     return <ChatRow {...item} />;
   };
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{ paddingBottom: bottom }}
-    >
-      <FlatList
-        data={chats}
-        keyExtractor={(item) => item.id.toString()}
-        scrollEnabled={false}
-        ItemSeparatorComponent={() => (
-          <View style={[defaultStyles.separator, { marginLeft: vs(30) }]} />
-        )}
-        renderItem={renderItems}
-      />
-    </ScrollView>
+    <GestureHandlerRootView>
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={{
+          paddingBottom: bottom,
+          backgroundColor: "#fff",
+        }}
+      >
+        <FlatList
+          data={chats}
+          keyExtractor={(item) => item.id.toString()}
+          scrollEnabled={false}
+          ItemSeparatorComponent={() => (
+            <View style={[defaultStyles.separator, { marginLeft: vs(20) }]} />
+          )}
+          renderItem={renderItems}
+        />
+      </ScrollView>
+    </GestureHandlerRootView>
   );
 }
 
